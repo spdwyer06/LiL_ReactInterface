@@ -1,6 +1,7 @@
 import '../css/App.css';
 
 import AddAppointments from './AddAppointments';
+import SearchAppointments from './SearchAppointments';
 
 function App() {
   return (
@@ -10,7 +11,7 @@ function App() {
         <div className="col-md-12 bg-white">
           <div className="container">
             <AddAppointments />
-            <div>Search Appointments</div>
+            <SearchAppointments />
             <div>List Appointments</div>
           </div>
         </div>
