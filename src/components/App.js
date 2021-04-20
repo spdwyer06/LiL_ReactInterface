@@ -24,7 +24,9 @@ function App() {
     setMyAppointments(appointments);
   }
 
-  
+  // const petName = myAppointments.map(appointment => (
+  //   <div>{appointment.petName}</div>
+  // ));
 
   return (
     <main className="page bg-white" id="petratings">
@@ -33,9 +35,10 @@ function App() {
         <div className="col-md-12 bg-white">
           <div className="container">
             {/* {myName} */}
+            {/* {petName} */}
             <AddAppointments />
             <SearchAppointments />
-            <ListAppointments />
+            <ListAppointments appointments={myAppointments} />
           </div>
         </div>
       </div>
