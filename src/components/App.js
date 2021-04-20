@@ -6,10 +6,13 @@ import AddAppointments from './AddAppointments';
 import SearchAppointments from './SearchAppointments';
 import ListAppointments from './ListAppointments';
 
+import {without} from 'lodash';
+
 function App() {
 
   // const [myName, setMyName] = useState('Sean');
   const [myAppointments, setMyAppointments] = useState([]);
+  const [lastIndex, setLastIndex] = useState(0);
 
   useEffect(() => {
     fetchSeedData();
@@ -18,10 +21,20 @@ function App() {
   const fetchSeedData = async() => {
     const res = await fetch('./seedData.json');
     const result = await res.json();
-    const appointments = result.map(item => {
-      return item;
+    const appointments = result.map(appointment => {
+      appointment.Id = lastIndex;
+      setLastIndex(lastIndex + 1);
+      return appointment;
     });
     setMyAppointments(appointments);
+  }
+
+  const deleteAppointment = (appointment) => {
+    let tempAppointments = myAppointments;
+    // console.log(myAppointments.length);
+    tempAppointments = without(tempAppointments, appointment);
+    // console.log(myAppointments.length);
+    setMyAppointments(tempAppointments);
   }
 
   // const petName = myAppointments.map(appointment => (
@@ -38,7 +51,7 @@ function App() {
             {/* {petName} */}
             <AddAppointments />
             <SearchAppointments />
-            <ListAppointments appointments={myAppointments} />
+            <ListAppointments appointments={myAppointments} deleteAppointment={deleteAppointment} />
           </div>
         </div>
       </div>
