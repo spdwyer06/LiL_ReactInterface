@@ -16,7 +16,7 @@ const ListAppointments = (props) => {
 
             <div className="pet-info media-body">
                 <div className="pet-head d-flex">
-                    <span className="pet-name">{appointment.petName}</span>
+                    <span className="pet-name" contentEditable suppressContentEditableWarning onBlur={(e) => props.updateInfo('petName', e.target.innerText, appointment.Id)}>{appointment.petName}</span>
                     <span className="apt-date ml-auto">
                         {/* Moment requires 3 props: 
                             date => the date you want formatted
@@ -28,11 +28,11 @@ const ListAppointments = (props) => {
                 </div>
 
                 <div className="owner-name">
-                    <span className="label-item">Owner: </span>
-                    <span>{appointment.ownerName}</span>
+                    <span className="label-item" >Owner: </span>
+                    <span contentEditable suppressContentEditableWarning onBlur={(e) => props.updateInfo('ownerName', e.target.innerText, appointment.Id)}>{appointment.ownerName}</span>
                 </div>
             
-                <div className="apt-notes">{appointment.aptNotes}</div>
+                <div className="apt-notes" contentEditable suppressContentEditableWarning onBlur={(e) => props.updateInfo('aptNotes', e.target.innerText, appointment.Id)}>{appointment.aptNotes}</div>
             </div>
         </div>
         ))}

@@ -6,7 +6,7 @@ import AddAppointments from './AddAppointments';
 import SearchAppointments from './SearchAppointments';
 import ListAppointments from './ListAppointments';
 
-import {without} from 'lodash';
+import {findIndex, without} from 'lodash';
 
 function App() {
 
@@ -59,6 +59,12 @@ function App() {
 
   const searchAppointments = (query) => setQueryText(query);
 
+  const updateInfo = (name, value, id) => {
+    let tempAppointments = myAppointments;
+    let aptIndex = findIndex(myAppointments, {Id: id});
+    tempAppointments[aptIndex][name] = value;
+    setMyAppointments(tempAppointments);
+  }
 
   // const petName = myAppointments.map(appointment => (
   //   <div>{appointment.petName}</div>
@@ -94,7 +100,7 @@ function App() {
             <AddAppointments formDisplayOn={formDisplayOn} toggleFormDisplay={toggleFormDisplay} addAppointment={addAppointment} />
             <SearchAppointments orderBy={orderBy} orderDirection={orderDirection} changeOrder={changeOrder} searchAppointments={searchAppointments} />
             {/* <ListAppointments appointments={myAppointments} deleteAppointment={deleteAppointment} /> */}
-            <ListAppointments appointments={filteredAppointments} deleteAppointment={deleteAppointment} />
+            <ListAppointments appointments={filteredAppointments} deleteAppointment={deleteAppointment} updateInfo={updateInfo} />
           </div>
         </div>
       </div>
