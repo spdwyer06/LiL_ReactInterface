@@ -10,6 +10,7 @@ const SearchAppointments = (props) => {
               type="text"
               className="form-control"
               aria-label="Search Appointments"
+              onChange={(e) => props.searchAppointments(e.target.value)}
             />
             <div className="input-group-append">
               <button

@@ -16,6 +16,7 @@ function App() {
   const [formDisplayOn, setFormDisplayOn] = useState(false);
   const [orderBy, setOrderBy] = useState('petName');
   const [orderDirection, setOrderDirection] = useState('asc');
+  const [queryText, setQueryText] = useState('');
 
   useEffect(() => {
     fetchSeedData();
@@ -56,6 +57,9 @@ function App() {
     setOrderDirection(direction);
   }
 
+  const searchAppointments = (query) => setQueryText(query);
+
+
   // const petName = myAppointments.map(appointment => (
   //   <div>{appointment.petName}</div>
   // ));
@@ -68,12 +72,16 @@ function App() {
   else
     order = -1;
 
-  filteredAppointments.sort((aptOne, aptTwo) => {
+  filteredAppointments = filteredAppointments.sort((aptOne, aptTwo) => {
     if(aptOne[orderBy].toLowerCase() < aptTwo[orderBy].toLowerCase())
       return -1 * order;
     else
       return 1 * order;
-  })
+  }).filter(apt => {
+    return(
+      apt['petName'].toLowerCase().includes(queryText.toLowerCase()) || apt['ownerName'].toLowerCase().includes(queryText.toLowerCase()) || apt['aptNotes'].toLowerCase().includes(queryText.toLowerCase())
+    );
+  });
 
   return (
     <main className="page bg-white" id="petratings">
@@ -84,7 +92,7 @@ function App() {
             {/* {myName} */}
             {/* {petName} */}
             <AddAppointments formDisplayOn={formDisplayOn} toggleFormDisplay={toggleFormDisplay} addAppointment={addAppointment} />
-            <SearchAppointments orderBy={orderBy} orderDirection={orderDirection} changeOrder={changeOrder} />
+            <SearchAppointments orderBy={orderBy} orderDirection={orderDirection} changeOrder={changeOrder} searchAppointments={searchAppointments} />
             {/* <ListAppointments appointments={myAppointments} deleteAppointment={deleteAppointment} /> */}
             <ListAppointments appointments={filteredAppointments} deleteAppointment={deleteAppointment} />
           </div>
