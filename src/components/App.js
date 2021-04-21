@@ -13,7 +13,9 @@ function App() {
   // const [myName, setMyName] = useState('Sean');
   const [myAppointments, setMyAppointments] = useState([]);
   const [lastIndex, setLastIndex] = useState(0);
-  const [formDisplayOn, setFormDisplayOn] = useState(false)
+  const [formDisplayOn, setFormDisplayOn] = useState(false);
+  const [orderBy, setOrderBy] = useState('petName');
+  const [orderDirection, setOrderDirection] = useState('asc');
 
   useEffect(() => {
     fetchSeedData();
@@ -53,6 +55,21 @@ function App() {
   //   <div>{appointment.petName}</div>
   // ));
 
+
+  let order;
+  let filteredAppointments = myAppointments;
+  if(orderDirection == 'asc')
+    order = 1;
+  else
+    order = -1;
+
+  filteredAppointments.sort((aptOne, aptTwo) => {
+    if(aptOne[orderBy].toLowerCase() < aptTwo[orderBy].toLowerCase())
+      return -1 * order;
+    else
+      return 1 * order;
+  })
+
   return (
     <main className="page bg-white" id="petratings">
     <div className="container">
@@ -62,8 +79,9 @@ function App() {
             {/* {myName} */}
             {/* {petName} */}
             <AddAppointments formDisplayOn={formDisplayOn} toggleFormDisplay={toggleFormDisplay} addAppointment={addAppointment} />
-            <SearchAppointments />
-            <ListAppointments appointments={myAppointments} deleteAppointment={deleteAppointment} />
+            <SearchAppointments orderBy={orderBy} orderDirection={orderDirection} />
+            {/* <ListAppointments appointments={myAppointments} deleteAppointment={deleteAppointment} /> */}
+            <ListAppointments appointments={filteredAppointments} deleteAppointment={deleteAppointment} />
           </div>
         </div>
       </div>
