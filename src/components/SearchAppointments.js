@@ -23,20 +23,20 @@ const SearchAppointments = (props) => {
               </button>
 
               <div className="sort-menu dropdown-menu dropdown-menu-right">
-                <button className={'sort-by dropdown-item ' + (props.orderBy == 'petName' ? 'active' : '')} href="#">
+                <button className={'sort-by dropdown-item ' + (props.orderBy == 'petName' ? 'active' : '')} href="#" onClick={() => props.changeOrder('petName', props.orderDirection)}>
                   Pet Name
                 </button>
-                <button className={'sort-by dropdown-item ' + (props.orderBy == 'aptDate' ? 'active' : '')} href="#">
+                <button className={'sort-by dropdown-item ' + (props.orderBy == 'aptDate' ? 'active' : '')} href="#" onClick={() => props.changeOrder('aptDate', props.orderDirection)}>
                   Date
                 </button>
-                <button className={'sort-by dropdown-item ' + (props.orderBy == 'ownerName' ? 'active' : '')} href="#">
+                <button className={'sort-by dropdown-item ' + (props.orderBy == 'ownerName' ? 'active' : '')} href="#" onClick={() => props.changeOrder('ownerName', props.orderDirection)}>
                   Owner
                 </button>
                 <div role="separator" className="dropdown-divider" />
-                <button className={'sort-by dropdown-item ' + (props.orderDirection == 'asc' ? 'active' : '')} href="#">
+                <button className={'sort-by dropdown-item ' + (props.orderDirection == 'asc' ? 'active' : '')} href="#" onClick={() => props.changeOrder(props.orderBy, 'asc')}>
                   Asc
                 </button>
-                <button className={'sort-by dropdown-item ' + (props.orderDirection == 'desc' ? 'active' : '')} href="#">
+                <button className={'sort-by dropdown-item ' + (props.orderDirection == 'desc' ? 'active' : '')} href="#" onClick={() => props.changeOrder(props.orderBy, 'desc')}>
                   Desc
                 </button>
               </div>

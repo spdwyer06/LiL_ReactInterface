@@ -51,6 +51,11 @@ function App() {
     setLastIndex(lastIndex + 1);
   }
 
+  const changeOrder = (order, direction) => {
+    setOrderBy(order);
+    setOrderDirection(direction);
+  }
+
   // const petName = myAppointments.map(appointment => (
   //   <div>{appointment.petName}</div>
   // ));
@@ -79,7 +84,7 @@ function App() {
             {/* {myName} */}
             {/* {petName} */}
             <AddAppointments formDisplayOn={formDisplayOn} toggleFormDisplay={toggleFormDisplay} addAppointment={addAppointment} />
-            <SearchAppointments orderBy={orderBy} orderDirection={orderDirection} />
+            <SearchAppointments orderBy={orderBy} orderDirection={orderDirection} changeOrder={changeOrder} />
             {/* <ListAppointments appointments={myAppointments} deleteAppointment={deleteAppointment} /> */}
             <ListAppointments appointments={filteredAppointments} deleteAppointment={deleteAppointment} />
           </div>
