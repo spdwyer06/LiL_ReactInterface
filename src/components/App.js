@@ -40,6 +40,15 @@ function App() {
 
   const toggleFormDisplay = () => setFormDisplayOn(!formDisplayOn);
 
+  const addAppointment = (appointment) => {
+    let tempAppointments = myAppointments;
+    appointment.Id = lastIndex;
+    tempAppointments.unshift(appointment);
+
+    setMyAppointments(tempAppointments);
+    setLastIndex(lastIndex + 1);
+  }
+
   // const petName = myAppointments.map(appointment => (
   //   <div>{appointment.petName}</div>
   // ));
@@ -52,7 +61,7 @@ function App() {
           <div className="container">
             {/* {myName} */}
             {/* {petName} */}
-            <AddAppointments formDisplayOn={formDisplayOn} toggleFormDisplay={toggleFormDisplay} />
+            <AddAppointments formDisplayOn={formDisplayOn} toggleFormDisplay={toggleFormDisplay} addAppointment={addAppointment} />
             <SearchAppointments />
             <ListAppointments appointments={myAppointments} deleteAppointment={deleteAppointment} />
           </div>

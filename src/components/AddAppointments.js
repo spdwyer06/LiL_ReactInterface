@@ -1,3 +1,4 @@
+import { initial } from 'lodash';
 import {useState} from 'react';
 import {FaPlus} from 'react-icons/fa';
 
@@ -46,6 +47,31 @@ const AddAppointments = (props) => {
         // console.log(stateNameCap);
     }
 
+    const handleSubmit = (e) => {
+        // Prevent the form from submitting and reloading the page
+        e.preventDefault();
+        let tempAppointment = {
+            petName: petName,
+            ownerName: ownerName,
+            aptDate: aptDate + ' ' + aptTime,
+            aptNotes: aptNotes
+        };
+
+        props.addAppointment(tempAppointment);
+
+        clearStateVariables();
+
+        props.toggleFormDisplay();
+    };
+
+    const clearStateVariables = () => {
+        setPetName('');
+        setOwnerName('');
+        setAptDate('');
+        setAptTime('');
+        setAptNotes('');
+    }
+
 
     return(
         // <div className="card textcenter mt-3 add-appointment">
@@ -55,7 +81,7 @@ const AddAppointments = (props) => {
         </div>
 
         <div className="card-body">
-          <form id="aptForm" noValidate>
+          <form id="aptForm" noValidate onSubmit={handleSubmit}>
             <div className="form-group form-row">
               <label
                 className="col-md-2 col-form-label text-md-right"
