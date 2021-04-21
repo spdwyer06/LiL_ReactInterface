@@ -13,6 +13,7 @@ function App() {
   // const [myName, setMyName] = useState('Sean');
   const [myAppointments, setMyAppointments] = useState([]);
   const [lastIndex, setLastIndex] = useState(0);
+  const [formDisplayOn, setFormDisplayOn] = useState(false)
 
   useEffect(() => {
     fetchSeedData();
@@ -37,6 +38,8 @@ function App() {
     setMyAppointments(tempAppointments);
   }
 
+  const toggleFormDisplay = () => setFormDisplayOn(!formDisplayOn);
+
   // const petName = myAppointments.map(appointment => (
   //   <div>{appointment.petName}</div>
   // ));
@@ -49,7 +52,7 @@ function App() {
           <div className="container">
             {/* {myName} */}
             {/* {petName} */}
-            <AddAppointments />
+            <AddAppointments formDisplayOn={formDisplayOn} toggleFormDisplay={toggleFormDisplay} />
             <SearchAppointments />
             <ListAppointments appointments={myAppointments} deleteAppointment={deleteAppointment} />
           </div>
